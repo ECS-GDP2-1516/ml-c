@@ -1,5 +1,5 @@
 #include "MLP.h"
-#include <cstdlib>
+//#include <cstdlib>
 
 MLP::MLP()
 {
@@ -11,24 +11,36 @@ MLP::~MLP()
     //dtor
 }
 
-double* MLP::distribution()
+double MLP::classify(double* sample)
 {
     this->reset();
 
-    double* r = (double*)malloc(sizeof(double) * NUM_CLASSES);
+    double winningClass = -1;
+    double winningProb  = -1;
 
     for (int i = 0; i < NUM_CLASSES; i++)
     {
-        r[i] = this->outputs[i].value();
+        double probability = this->outputs[i]->value(sample);
+
+        if (probability > winningProb)
+        {
+            winningProb  = probability;
+            winningClass = i;
+        }
     }
 
-    return r;
+    return winningClass;
 }
 
 void MLP::reset()
 {
     for (int i = 0; i < NUM_CLASSES; i++)
     {
-        this->outputs[i].reset();
+        this->outputs[i]->reset();
     }
+}
+
+void MLP::link(NeuralConnection** _outputs)
+{
+    this->outputs = _outputs;
 }

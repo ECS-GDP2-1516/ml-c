@@ -1,8 +1,8 @@
 #include "NeuralOutput.h"
 
-NeuralOutput::NeuralOutput()
+NeuralOutput::NeuralOutput(int _size)
 {
-    //ctor
+    this->numInputs = _size;
 }
 
 NeuralOutput::~NeuralOutput()
@@ -10,10 +10,12 @@ NeuralOutput::~NeuralOutput()
     //dtor
 }
 
-void NeuralOutput::makeValue()
+void NeuralOutput::makeValue(double* sample)
 {
+    this->val = 0;
+
     for (int i = 0; i < this->numInputs; i++)
     {
-        this->val += this->inputs[i].value();
+        this->val += this->inputs[i]->value(sample);
     }
 }

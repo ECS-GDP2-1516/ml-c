@@ -2,6 +2,7 @@
 #define MLP_H
 
 #define NUM_CLASSES 3
+#define SAMPLE_SIZE 600
 
 #include "NeuralConnection.h"
 
@@ -10,10 +11,11 @@ class MLP
     public:
         MLP();
         virtual ~MLP();
-        double* distribution();
+        double classify(double* sample);
+        void link(NeuralConnection** _outputs);
+        NeuralConnection** outputs;
     protected:
     private:
-        NeuralConnection* outputs;
         void reset();
 };
 

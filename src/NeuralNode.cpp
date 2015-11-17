@@ -1,8 +1,11 @@
 #include "NeuralNode.h"
+#include <math.h>
 
-NeuralNode::NeuralNode()
+NeuralNode::NeuralNode(double _threshold, int _size, double* _weights)
 {
-    //ctor
+    this->numInputs = _size;
+    this->weights   = _weights;
+    this->threshold = _threshold;
 }
 
 NeuralNode::~NeuralNode()
@@ -10,13 +13,13 @@ NeuralNode::~NeuralNode()
     //dtor
 }
 
-void NeuralNode::makeValue()
+void NeuralNode::makeValue(double* sample)
 {
     this->val = this->threshold;
 
     for (int i = 0; i < this->numInputs; i++)
     {
-        this->val += this->inputs[i].value() * this->weights[i];
+        this->val += this->inputs[i]->value(sample) * this->weights[i];
     }
 
     if (this->val < -45.)
@@ -29,6 +32,6 @@ void NeuralNode::makeValue()
     }
     else
     {
-        //this.val = 1 / (1 + Math.exp(-this.val));
+        this->val = 1 / (1 + exp(-this->val));
     }
 }

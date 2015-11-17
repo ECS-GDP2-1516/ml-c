@@ -1,8 +1,8 @@
 #include "NeuralInput.h"
 
-NeuralInput::NeuralInput()
+NeuralInput::NeuralInput(int _attr)
 {
-    //ctor
+    this->attr = _attr;
 }
 
 NeuralInput::~NeuralInput()
@@ -10,7 +10,7 @@ NeuralInput::~NeuralInput()
     //dtor
 }
 
-double NeuralInput::value()
+double NeuralInput::value(double* sample)
 {
-    return this->val;
+    return (sample[this->attr] - attributeBases[this->attr]) / attributeRanges[this->attr];
 }

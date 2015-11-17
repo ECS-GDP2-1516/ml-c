@@ -7,13 +7,14 @@ class NeuralConnection
     public:
         NeuralConnection();
         virtual ~NeuralConnection();
-        virtual double value();
+        virtual double value(double* sample);
         void reset();
+        void link(NeuralConnection** _inputs);
     protected:
-        void makeValue();
+        virtual void makeValue(double* sample) { };
         double val = NAN;
-        int numInputs;
-        NeuralConnection* inputs;
+        int numInputs = 0;
+        NeuralConnection** inputs;
     private:
 
 };

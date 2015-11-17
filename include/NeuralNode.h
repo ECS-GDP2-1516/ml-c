@@ -4,16 +4,16 @@
 #include <NeuralConnection.h>
 
 
-class NeuralNode : protected NeuralConnection
+class NeuralNode : public NeuralConnection
 {
     public:
-        NeuralNode();
+        NeuralNode(double _threshold, int _size, double* _weights);
         virtual ~NeuralNode();
     protected:
-        void makeValue();
+        void makeValue(double* sample);
     private:
-        float threshold;
-        float* weights;
+        double threshold;
+        double* weights;
 };
 
 #endif // NEURALNODE_H

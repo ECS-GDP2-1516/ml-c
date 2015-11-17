@@ -7,10 +7,10 @@
 class NeuralOutput : public NeuralConnection
 {
     public:
-        NeuralOutput();
+        NeuralOutput(int _size);
         virtual ~NeuralOutput();
     protected:
-        void makeValue();
+        void makeValue(double* sample);
     private:
 };
 
