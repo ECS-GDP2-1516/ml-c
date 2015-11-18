@@ -261,16 +261,16 @@ float classify(double* v)
 
 void sigmoid(double* var)
 {
-    if (*var < -45.)
+    if (*var < -5.)
     {
         *var = 0;
     }
-    else if (*var > 45)
+    else if (*var > 5)
     {
         *var = 1;
     }
     else
     {
-        *var = 1 / (1 + exp(-*var));
+        *var = 0.1 * *var + 0.5;
     }
 }
