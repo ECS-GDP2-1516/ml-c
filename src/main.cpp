@@ -59,8 +59,6 @@ int classify(int* v)
 
 void sigmoid(int* var)
 {
-    printf("%d\n", *var);
-
     if (*var < -5 << 8)
     {
         *var = 0;
