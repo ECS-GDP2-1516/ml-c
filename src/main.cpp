@@ -7,7 +7,7 @@ void load(char* path);
 
 int main()
 {
-    load("../ml-java/data.txt");
+    load("data.txt");
 
     return 0;
 }
