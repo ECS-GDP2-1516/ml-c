@@ -15,33 +15,33 @@ int main()
 
 int classify(int* v)
 {
-    int* offset=getData();
-    int* s1;
-    int* e1;
-    int* s2=(int*)v;
-    int* e2=s2 + 300;
+int* offset=(int*)getData();
+int* s1;
+int* e1;
+int* s2=v;
+int* e2=s2 + 30;
 
-    // Layer 2
-    s1=v + 300;
-    e1=s1 + 4;
-    for (int* i = s1; i < e1; i++){
-        *i=*offset++;
-        for (int* j=s2; j < e2; j++) {
-            *i+=(*offset++**j) >> 8;
-        }
-        sigmoid(i);
+// Layer 2
+s1=v + 30;
+e1=s1 + 2;
+for (int* i = s1; i < e1; i++){
+    *i=*offset++;
+    for (int* j=s2; j < e2; j++) {
+        *i+=(*offset++**j) >> 12;
     }
+    sigmoid(i);
+}
 
-    // Layer 1
-    s2=v + 0;
-    e2=s2 + 3;
-    for (int* i = s2; i < e2; i++){
-        *i=*offset++;
-        for (int* j=s1; j < e1; j++) {
-            *i+=(*offset++**j) >> 8;
-        }
-        sigmoid(i);
+// Layer 1
+s2=v + 0;
+e2=s2 + 3;
+for (int* i = s2; i < e2; i++){
+    *i=*offset++;
+    for (int* j=s1; j < e1; j++) {
+        *i+=(*offset++**j) >> 12;
     }
+    sigmoid(i);
+}
 
     if (v[0] > v[1] && v[0] > v[2])
     {
@@ -49,26 +49,26 @@ int classify(int* v)
     }
     else if (v[1] > v[0] && v[1] > v[2])
     {
-        return 1 << 8;
+        return 1 << 12;
     }
     else
     {
-        return 2 << 8;
+        return 2 << 12;
     }
 }
 
 void sigmoid(int* var)
 {
-    if (*var < -5 << 8)
+    if (*var < -5 << 12)
     {
         *var = 0;
     }
-    else if (*var > 5 << 8)
+    else if (*var > 5 << 12)
     {
-        *var = 1 << 8;
+        *var = 1 << 12;
     }
     else
     {
-        *var = ((26 * *var) >> 8) + 128;
+        *var = ((410 * *var) >> 12) + 2048;
     }
 }
