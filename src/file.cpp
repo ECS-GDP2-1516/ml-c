@@ -20,7 +20,7 @@ void load(char* path)
     {
         fscanf(file, "%d,", &data[i++]);
 
-        if (i == 300)
+        if (i == 30)
         {
             total++;
             int expected;
@@ -28,7 +28,7 @@ void load(char* path)
 
             fscanf(file, "%d,\n", &expected);
             i = 0;
-            printf("%d %d\n", got, got == expected);
+            printf("%d %d %d\n", got, expected, got == expected);
 
             success += (got==expected);
         }
