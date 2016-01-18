@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdint.h>
 
-int classify(int* v);
+int classify();
+void insert_reading(int16_t x, int16_t y, int16_t z);
 
 void load(char* path)
 {
@@ -18,13 +20,20 @@ void load(char* path)
 
     while (!feof(file))
     {
-        fscanf(file, "%d,", &data[i++]);
+        int a;
+        int b;
+        int c;
 
-        if (i == 30)
+        fscanf(file, "%d,%d,%d,", &a, &b, &c);
+        insert_reading(a, b, c);
+
+        i++;
+
+        if (i == 20)
         {
             total++;
             int expected;
-            int got = classify(data);
+            int got = classify();
 
             fscanf(file, "%d,\n", &expected);
             i = 0;
